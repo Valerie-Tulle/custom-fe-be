@@ -1,0 +1,15 @@
+services:
+  frontend:
+    image: farhintestacr.azurecr.io/farhintestacr
+    build: 
+      context: frontend
+      dockerfile: ../frontend.Dockerfile
+
+  backend:
+    image: farhintestacr.azurecr.io/farhintestacr
+    build:
+      context: backend
+      dockerfile: ../backend.Dockerfile
+
+  custom:
+    build: ~/custom
