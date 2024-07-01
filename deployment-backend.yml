@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app_name: backend-app
+    namespace: ns-iamops-dev
+  name: backend-app-dp
+  namespace: ns-iamops-dev
+  labels:
+    app: backend-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-app
+  template:
+     metadata:
+       annotations:
+         app_name: backend-app
+         namespace: ns-iamops-dev
+       namespace: ns-iamops-dev
+       labels:
+         app: backend-app
+     spec:
+        containers:
+          - name: backend-app
+            image: farhintestacr.azurecr.io/farhintestacr
+            resources:
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+            ports:
+              - containerPort: 5000
+                protocol: 'TCP'
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-app-svc
+  namespace: ns-iamops-dev
+spec:
+  type: LoadBalancer
+  selector:
+    app: backend-app
+  ports:
+  - protocol: TCP
+    port: 5000
+    targetPort: 5000
+
+
+
+

@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app_name: frontend-app
+    namespace: ns-iamops-dev
+  name: frontend-app-dp
+  namespace: ns-iamops-dev
+  labels:
+    app: frontend-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-app
+  template:
+     metadata:
+       annotations:
+         app_name: frontend-app
+         namespace: ns-iamops-dev
+       namespace: ns-iamops-dev
+       labels:
+         app: frontend-app
+     spec:
+        containers:
+          - name: frontend-app
+            image: farhintestacr.azurecr.io/farhintestacr
+            resources:
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+            ports:
+              - containerPort: 3000
+                protocol: 'TCP'
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-app-svc
+  namespace: ns-iamops-dev
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend-app
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+
+
+
+
