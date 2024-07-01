@@ -42,7 +42,7 @@ jobs:
 
             - name: Building docker image 
               run: |
-                docker build -t farhintestacr.azurecr.io/farhintestacr:${{env.IMAGE_TAG}} ./backend/.Dockerfile
+                docker build -t ./backend/.Dockerfile
 
             - name: Container Build & Push to ACR
               run: |
