@@ -42,7 +42,7 @@ jobs:
 
             - name: Building docker image 
               run: |
-                docker build . -f ./frontend/Dockerfile 
+                docker build . -f ./backend/Dockerfile 
 
             - name: Container Build & Push to ACR
               run: |
