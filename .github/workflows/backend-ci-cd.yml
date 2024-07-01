@@ -1,4 +1,4 @@
-name: Backend CI-CD Pipeline 
+name: CI-CD Pipeline 
 env:
   USER_NAME: ${{secrets.AZURE_CLIENT_ID}}
   PASSWORD: ${{secrets.AZURE_CLIENT_SECRET}}
@@ -42,7 +42,7 @@ jobs:
 
             - name: Building docker image 
               run: |
-                docker build -t /backend/Dockerfile .
+                docker build -t farhintestacr.azurecr.io/farhintestacr:${{env.IMAGE_TAG}} ./backend/.
 
             - name: Container Build & Push to ACR
               run: |
@@ -63,6 +63,7 @@ jobs:
                 cluster-name: myAKSCluster
                 resource-group: aksResurceGroup
                 admin: 'false'
+                # use-kubelogin: 'true'
 
             - name: Deploy app to AKS
               uses: azure/k8s-deploy@v1
