@@ -5,9 +5,9 @@ env:
   IMAGE_TAG: ${{github.sha}}-${{github.run_id}}-${{github.run_number}}
 
 on: 
-    push:
-        branches:
-            - main
+    # push:
+    #     branches:
+    #         - main
     workflow_dispatch: 
       inputs:
         action:
